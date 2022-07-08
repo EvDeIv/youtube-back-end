@@ -32,7 +32,6 @@ export class UserController {
 	@HttpCode(200)
 	@Put('profile')
 	@Auth()
-	//TODO: Auth decorator && User decorator
 	async updateProdile(
 		@CurrentUser('_id') _id: Types.ObjectId,
 		@Body() dto: UserDto
