@@ -8,5 +8,5 @@ userId [for all]
 [x] - Get all videos, most popular by view, get by id with 
 comments & channel info
 [x] - update likes, views
-[] - Comments [add], byVideoId
-[] - Video upload
+[x] - Comments [add], get byVideoId
+[x] - Video upload

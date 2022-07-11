@@ -22,9 +22,10 @@ import { CurrentUser } from 'src/user/decorators/user.decorator'
 export class VideoController {
 	constructor(private readonly videoService: VideoService) {}
 
-	@Get(':id')
-	async getVideo(@Param('_id', IdValidationPipe) _id: Types.ObjectId) {
-		return this.videoService.byId(_id)
+	@Get('get-private/:id')
+	@Auth()
+	async getVideoPrivate(@Param('id', IdValidationPipe) id: Types.ObjectId) {
+		return this.videoService.byId(id, false)
 	}
 
 	@Get('by-user/:userId')
@@ -32,6 +33,12 @@ export class VideoController {
 		@Param('userId', IdValidationPipe) userId: Types.ObjectId
 	) {
 		return this.videoService.byUserId(userId)
+	}
+
+	@Get('by-user-private')
+	@Auth()
+	async getVideoByUserIdPrivate(@CurrentUser('_id') _id: Types.ObjectId) {
+		return this.videoService.byUserId(_id, true)
 	}
 
 	@Get()
@@ -42,6 +49,11 @@ export class VideoController {
 	@Get('most-popular')
 	async getMostPopularByViews() {
 		return this.videoService.getMostPopularByViews()
+	}
+
+	@Get(':id')
+	async getVideo(@Param('id', IdValidationPipe) id: Types.ObjectId) {
+		return this.videoService.byId(id)
 	}
 
 	@UsePipes(new ValidationPipe())

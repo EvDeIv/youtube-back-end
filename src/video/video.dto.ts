@@ -5,7 +5,6 @@ export class VideoDto {
 	@IsString()
 	name: string
 
-	@IsBoolean()
 	isPublic?: boolean
 
 	@IsString()
@@ -17,6 +16,5 @@ export class VideoDto {
 	@IsString()
 	thumbnailPath: string
 
-	@IsObjectId()
-	userId: string
+	userId?: string
 }

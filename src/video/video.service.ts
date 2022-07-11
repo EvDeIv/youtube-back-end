@@ -1,4 +1,5 @@
 import {
+	BadRequestException,
 	Injectable,
 	NotFoundException,
 	UnauthorizedException
@@ -15,8 +16,12 @@ export class VideoService {
 		@InjectModel(VideoModel) private readonly VideoModel: ModelType<VideoModel>
 	) {}
 
-	async byId(_id: Types.ObjectId) {
-		const video = await this.VideoModel.findOne({ _id, isPublic: true }, '-__v')
+	async byId(_id: Types.ObjectId, isPublic = true) {
+		//Check authUserId === video.userId
+		const video = await this.VideoModel.findOne(
+			isPublic ? { _id, isPublic: true } : { _id },
+			'-__v'
+		)
 		if (!video) throw new UnauthorizedException('Video not found')
 
 		return video
@@ -36,8 +41,8 @@ export class VideoService {
 				$or: [{ name: new RegExp(searchTerm, 'i') }]
 			}
 
-		return this.VideoModel.find(options)
-			.find({ isPublic: true }, '-__v')
+		return this.VideoModel.find({ ...options, isPublic: true })
+			.select('-__v')
 			.sort({ createdAt: 'desc' })
 			.exec()
 	}
@@ -60,7 +65,7 @@ export class VideoService {
 			thumbnailPath: ''
 		}
 
-		const video = await this.VideoModel.create({ defaultValue })
+		const video = await this.VideoModel.create(defaultValue)
 		return video._id
 	}
 
@@ -96,7 +101,9 @@ export class VideoService {
 		return updatedVideo
 	}
 
-	async updateReaction(_id: string, type: 'inc' | 'dec') {
+	async updateReaction(_id: string, type?: 'inc' | 'dec') {
+		if (!type) throw new BadRequestException('Type is missing')
+
 		const updatedVideo = await this.VideoModel.findByIdAndUpdate(
 			_id,
 			{ $inc: { likes: type === 'inc' ? 1 : -1 } },
