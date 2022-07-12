@@ -39,12 +39,9 @@ export class UserService {
 		user.name = dto.name
 		user.description = dto.description
 		user.location = dto.location
-		user.bannerPath = dto.bannerPath
 		user.avatarPath = dto.avatarPath
 
-		await user.save()
-
-		return
+		return await user.save()
 	}
 
 	async getMostPopular() {
@@ -52,7 +49,7 @@ export class UserService {
 			{ subscribersCount: { $gt: 0 } },
 			'-password -__v'
 		)
-			.sort({ subcribersCout: -1 })
+			.sort({ subscribersCount: -1 })
 			.exec()
 	}
 }

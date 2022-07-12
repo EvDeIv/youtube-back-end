@@ -10,3 +10,43 @@ comments & channel info
 [x] - update likes, views
 [x] - Comments [add], get byVideoId
 [x] - Video upload
+[] - Update userId in video
+[] - Update views
+
+channels: 
+- Jack Herrington - /uploads/avatar/Jack Herrington.jpg
+- Twenty One Pilots - /uploads/avatar/twenty one pilots.jpg
+- Logan Paul - /uploads/avatar/Logan Paul.jpg
+- Misha Katsurin - /uploads/avatar/Misha Katsurin.jpg
+- Lofi Girl - /uploads/avatar/Lofi Girl.jpg
+- Theo - ping.gg - /uploads/avatar/Theo - ping.gg.jpg
+
+thumbnails: 
+/uploads/thumbnails/Harington.jpg
+/uploads/thumbnails/Harington1.jpg
+/uploads/thumbnails/Harington2.jpg
+/uploads/thumbnails/katsurin.jpg
+/uploads/thumbnails/katsurin1.jpg
+/uploads/thumbnails/katsurin2.jpg
+/uploads/thumbnails/lofi.jpg
+/uploads/thumbnails/lofi1.jpg
+/uploads/thumbnails/lofi2.jpg
+/uploads/thumbnails/Logan.jpg
+/uploads/thumbnails/Logan1.jpg
+/uploads/thumbnails/Logan2.jpg
+/uploads/thumbnails/pilots.jpg
+/uploads/thumbnails/pilots1.jpg
+/uploads/thumbnails/pilots2.jpg
+/uploads/thumbnails/theo.jpg
+/uploads/thumbnails/theo1.jpg
+/uploads/thumbnails/theo2.jpg
+
+videos: 
+/uploads/videos/Daffodils - 112389.mp4
+/uploads/videos/Live Wallpaper - 112722.mp4
+/uploads/videos/People - 84973.mp4
+/uploads/videos/Record - 65390.mp4
+/uploads/videos/Sakura - 110790.mp4
+/uploads/videos/Sunset - 111204.mp4
+/uploads/videos/Water Lilies - 75008.mp4
+/uploads/videos/Woman - 58142.mp4

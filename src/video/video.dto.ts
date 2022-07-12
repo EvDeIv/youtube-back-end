@@ -16,5 +16,5 @@ export class VideoDto {
 	@IsString()
 	thumbnailPath: string
 
-	userId?: string
+	user?: string
 }

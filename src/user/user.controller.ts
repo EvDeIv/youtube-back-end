@@ -17,6 +17,7 @@ import { CurrentUser } from './decorators/user.decorator'
 import { Auth } from './../auth/decorators/auth.decorator'
 import { timeStamp } from 'console'
 import { Types } from 'mongoose'
+import { IdValidationPipe } from 'src/pipes/id.validation.pipe'
 
 @Controller('user')
 export class UserController {
@@ -37,6 +38,17 @@ export class UserController {
 		@Body() dto: UserDto
 	) {
 		return this.userService.updateProfile(_id, dto)
+	}
+
+	@UsePipes(new ValidationPipe())
+	@HttpCode(200)
+	@Put(':id')
+	@Auth()
+	async updateUser(
+		@Param('id', IdValidationPipe) id: Types.ObjectId,
+		@Body() dto: UserDto
+	) {
+		return this.userService.updateProfile(id, dto)
 	}
 
 	@Get('most-popular')
