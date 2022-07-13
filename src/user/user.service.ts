@@ -16,6 +16,23 @@ export class UserService {
 		@InjectModel(UserModel) private readonly UserModel: ModelType<UserModel>
 	) {}
 
+	async getUserWithVideoCount(_id: Types.ObjectId) {
+		return await this.UserModel.aggregate()
+			.lookup({
+				from: 'Video',
+				foreignField: 'user',
+				localField: '_id',
+				as: 'videos'
+			})
+			.addFields({
+				videoCount: {
+					$size: '$videos'
+				}
+			})
+			.project({ __v: 0, password: 0, videos: 0 })
+			.exec()
+	}
+
 	async byId(_id: Types.ObjectId) {
 		const user = await this.UserModel.findById(_id, '-password -__v')
 		if (!user) throw new UnauthorizedException('User not found')

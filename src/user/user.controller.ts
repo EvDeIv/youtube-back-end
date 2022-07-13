@@ -26,13 +26,13 @@ export class UserController {
 	@Get('profile')
 	@Auth()
 	async getProfile(@CurrentUser('_id') _id: Types.ObjectId) {
-		return this.userService.byId(_id)
+		return this.userService.getUserWithVideoCount(_id)
 	}
 
 	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
 	@Put('profile')
-	@Auth()
+	@Auth() //Admin
 	async updateProdile(
 		@CurrentUser('_id') _id: Types.ObjectId,
 		@Body() dto: UserDto
