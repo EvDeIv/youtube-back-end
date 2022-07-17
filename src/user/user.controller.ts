@@ -1,11 +1,8 @@
 import {
 	Controller,
 	Get,
-	Post,
 	Body,
-	Patch,
 	Param,
-	Delete,
 	UsePipes,
 	ValidationPipe,
 	HttpCode,
@@ -15,7 +12,6 @@ import { UserService } from './user.service'
 import { UserDto } from './user.dto'
 import { CurrentUser } from './decorators/user.decorator'
 import { Auth } from './../auth/decorators/auth.decorator'
-import { timeStamp } from 'console'
 import { Types } from 'mongoose'
 import { IdValidationPipe } from 'src/pipes/id.validation.pipe'
 

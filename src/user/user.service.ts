@@ -17,7 +17,8 @@ export class UserService {
 	) {}
 
 	async getUserWithVideoCount(_id: Types.ObjectId) {
-		return await this.UserModel.aggregate()
+		return this.UserModel.aggregate()
+			.match({ _id })
 			.lookup({
 				from: 'Video',
 				foreignField: 'user',
@@ -31,6 +32,7 @@ export class UserService {
 			})
 			.project({ __v: 0, password: 0, videos: 0 })
 			.exec()
+			.then((data) => data[0])
 	}
 
 	async byId(_id: Types.ObjectId) {
